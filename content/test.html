@@ -1,0 +1,813 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Software in the Era of AI - Andras' Wiki</title>
+<link href="/static/manifest.json" rel="manifest"/>
+
+<!-- Pygments CSS for code highlighting (local one-dark style) -->
+
+<!-- Common wiki styles -->
+
+<style>
+        /* Page-specific styles for markdown pages with navigation */
+        .page-container {
+            max-width: 980px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .navigation {
+            margin-bottom: 30px;
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+            align-items: center;
+        }
+
+        .nav-link {
+            color: #007bff;
+            text-decoration: none;
+            font-weight: 500;
+            padding: 8px 16px;
+            border-radius: 20px;
+            background: white;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            transition: all 0.2s ease;
+            font-size: 14px;
+        }
+
+        .nav-link:hover {
+            background: #007bff;
+            color: white;
+            transform: translateY(-1px);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+        }
+
+        .content-wrapper {
+            background: #ffffff;
+            border-radius: 12px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.06), 0 1px 2px rgba(0,0,0,0.04);
+            overflow: hidden;
+        }
+
+        .content-wrapper .markdown-body {
+            box-sizing: border-box;
+            min-width: 200px;
+            max-width: none;
+            margin: 0;
+            padding: 45px;
+        }
+
+        /* Adjust for smaller screens */
+        @media (max-width: 768px) {
+            .page-container {
+                padding: 10px;
+            }
+
+            .content-wrapper .markdown-body {
+                padding: 20px;
+            }
+
+            .navigation {
+                justify-content: center;
+            }
+        }
+    </style>
+<style>
+        .markdown-body {
+            box-sizing: border-box;
+            min-width: 200px;
+            max-width: 980px;
+            margin: 0 auto;
+            padding: 45px;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Noto Sans', Helvetica, Arial, sans-serif;
+            font-size: 16px;
+            line-height: 1.5;
+            word-wrap: break-word;
+        }
+        
+        .markdown-body h1, .markdown-body h2, .markdown-body h3 {
+            margin-top: 24px;
+            margin-bottom: 16px;
+            font-weight: 600;
+            line-height: 1.25;
+        }
+        
+        .markdown-body h1 {
+            font-size: 2em;
+            border-bottom: 1px solid #eaecef;
+            padding-bottom: 0.3em;
+        }
+        
+        .markdown-body h2 {
+            font-size: 1.5em;
+            border-bottom: 1px solid #eaecef;
+            padding-bottom: 0.3em;
+        }
+        
+        .markdown-body h3 {
+            font-size: 1.25em;
+        }
+        
+        .markdown-body code {
+            padding: 0.2em 0.4em;
+            margin: 0;
+            font-size: 85%;
+            background-color: rgba(27,31,35,0.05);
+            border-radius: 3px;
+        }
+        
+        .markdown-body pre {
+            padding: 16px;
+            overflow: auto;
+            font-size: 85%;
+            line-height: 1.45;
+            background-color: #f6f8fa;
+            border-radius: 3px;
+        }
+        
+        .markdown-body blockquote {
+            padding: 0 1em;
+            color: #6a737d;
+            border-left: 0.25em solid #dfe2e5;
+            margin: 0;
+        }
+        
+        .markdown-body table {
+            border-spacing: 0;
+            border-collapse: collapse;
+            width: 100%;
+        }
+        
+        .markdown-body table th,
+        .markdown-body table td {
+            padding: 6px 13px;
+            border: 1px solid #dfe2e5;
+        }
+        
+        .markdown-body table th {
+            font-weight: 600;
+            background-color: #f6f8fa;
+        }
+        </style><style>/* Pygments 'one-dark' style CSS */
+pre { 
+    line-height: 125%; 
+    background-color: #282c34 !important;
+    color: #abb2bf !important;
+}
+td.linenos .normal { color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px; }
+span.linenos { color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px; }
+td.linenos .special { color: #000000; background-color: #ffffc0; padding-left: 5px; padding-right: 5px; }
+span.linenos.special { color: #000000; background-color: #ffffc0; padding-left: 5px; padding-right: 5px; }
+
+/* One Dark theme background and base styling */
+.highlight { 
+    background-color: #282c34 !important; 
+    color: #abb2bf !important;
+    border-radius: 8px;
+}
+.highlight pre { 
+    background-color: #282c34 !important; 
+    color: #abb2bf !important;
+}
+
+.highlight .hll { background-color: #3e4451 !important } /* Highlighted line */
+.highlight .c { color: #7F848E !important } /* Comment */
+.highlight .err { color: #ABB2BF !important } /* Error */
+.highlight .esc { color: #ABB2BF !important } /* Escape */
+.highlight .g { color: #ABB2BF !important } /* Generic */
+.highlight .k { color: #C678DD !important } /* Keyword */
+.highlight .l { color: #ABB2BF !important } /* Literal */
+.highlight .n { color: #E06C75 !important } /* Name */
+.highlight .o { color: #56B6C2 !important } /* Operator */
+.highlight .x { color: #ABB2BF !important } /* Other */
+.highlight .p { color: #ABB2BF !important } /* Punctuation */
+.highlight .ch { color: #7F848E !important } /* Comment.Hashbang */
+.highlight .cm { color: #7F848E !important } /* Comment.Multiline */
+.highlight .cp { color: #7F848E !important } /* Comment.Preproc */
+.highlight .cpf { color: #7F848E !important } /* Comment.PreprocFile */
+.highlight .c1 { color: #7F848E !important } /* Comment.Single */
+.highlight .cs { color: #7F848E !important } /* Comment.Special */
+.highlight .gd { color: #ABB2BF !important } /* Generic.Deleted */
+.highlight .ge { color: #ABB2BF !important } /* Generic.Emph */
+.highlight .ges { color: #ABB2BF !important } /* Generic.EmphStrong */
+.highlight .gr { color: #ABB2BF !important } /* Generic.Error */
+.highlight .gh { color: #ABB2BF !important } /* Generic.Heading */
+.highlight .gi { color: #ABB2BF !important } /* Generic.Inserted */
+.highlight .go { color: #ABB2BF !important } /* Generic.Output */
+.highlight .gp { color: #ABB2BF !important } /* Generic.Prompt */
+.highlight .gs { color: #ABB2BF !important } /* Generic.Strong */
+.highlight .gu { color: #ABB2BF !important } /* Generic.Subheading */
+.highlight .gt { color: #ABB2BF !important } /* Generic.Traceback */
+.highlight .kc { color: #E5C07B !important } /* Keyword.Constant */
+.highlight .kd { color: #C678DD !important } /* Keyword.Declaration */
+.highlight .kn { color: #C678DD !important } /* Keyword.Namespace */
+.highlight .kp { color: #C678DD !important } /* Keyword.Pseudo */
+.highlight .kr { color: #C678DD !important } /* Keyword.Reserved */
+.highlight .kt { color: #E5C07B !important } /* Keyword.Type */
+.highlight .ld { color: #ABB2BF !important } /* Literal.Date */
+.highlight .m { color: #D19A66 !important } /* Literal.Number */
+.highlight .s { color: #98C379 !important } /* Literal.String */
+.highlight .na { color: #E06C75 !important } /* Name.Attribute */
+.highlight .nb { color: #E5C07B !important } /* Name.Builtin */
+.highlight .nc { color: #E5C07B !important } /* Name.Class */
+.highlight .no { color: #E06C75 !important } /* Name.Constant */
+.highlight .nd { color: #61AFEF !important } /* Name.Decorator */
+.highlight .ni { color: #E06C75 !important } /* Name.Entity */
+.highlight .ne { color: #E06C75 !important } /* Name.Exception */
+.highlight .nf { color: #61AFEF !important; font-weight: bold } /* Name.Function */
+.highlight .nl { color: #E06C75 !important } /* Name.Label */
+.highlight .nn { color: #E06C75 !important } /* Name.Namespace */
+.highlight .nx { color: #E06C75 !important } /* Name.Other */
+.highlight .py { color: #E06C75 !important } /* Name.Property */
+.highlight .nt { color: #E06C75 !important } /* Name.Tag */
+.highlight .nv { color: #E06C75 !important } /* Name.Variable */
+.highlight .ow { color: #56B6C2 !important } /* Operator.Word */
+.highlight .pm { color: #ABB2BF !important } /* Punctuation.Marker */
+.highlight .w { color: #ABB2BF !important } /* Text.Whitespace */
+.highlight .mb { color: #D19A66 !important } /* Literal.Number.Bin */
+.highlight .mf { color: #D19A66 !important } /* Literal.Number.Float */
+.highlight .mh { color: #D19A66 !important } /* Literal.Number.Hex */
+.highlight .mi { color: #D19A66 !important } /* Literal.Number.Integer */
+.highlight .mo { color: #D19A66 !important } /* Literal.Number.Oct */
+.highlight .sa { color: #98C379 !important } /* Literal.String.Affix */
+.highlight .sb { color: #98C379 !important } /* Literal.String.Backtick */
+.highlight .sc { color: #98C379 !important } /* Literal.String.Char */
+.highlight .dl { color: #98C379 !important } /* Literal.String.Delimiter */
+.highlight .sd { color: #98C379 !important } /* Literal.String.Doc */
+.highlight .s2 { color: #98C379 !important } /* Literal.String.Double */
+.highlight .se { color: #98C379 !important } /* Literal.String.Escape */
+.highlight .sh { color: #98C379 !important } /* Literal.String.Heredoc */
+.highlight .si { color: #98C379 !important } /* Literal.String.Interpol */
+.highlight .sx { color: #98C379 !important } /* Literal.String.Other */
+.highlight .sr { color: #98C379 !important } /* Literal.String.Regex */
+.highlight .s1 { color: #98C379 !important } /* Literal.String.Single */
+.highlight .ss { color: #98C379 !important } /* Literal.String.Symbol */
+.highlight .bp { color: #E5C07B !important } /* Name.Builtin.Pseudo */
+.highlight .fm { color: #56B6C2 !important; font-weight: bold } /* Name.Function.Magic */
+.highlight .vc { color: #E06C75 !important } /* Name.Variable.Class */
+.highlight .vg { color: #E06C75 !important } /* Name.Variable.Global */
+.highlight .vi { color: #E06C75 !important } /* Name.Variable.Instance */
+.highlight .vm { color: #E06C75 !important } /* Name.Variable.Magic */
+.highlight .il { color: #D19A66 !important } /* Literal.Number.Integer.Long */
+</style><style>/* Common Wiki Styles */
+
+/* Base Layout Styles */
+body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Noto Sans', Helvetica, Arial, sans-serif;
+    padding: 20px;
+    background-color: #fafbfc;
+    margin: 0;
+}
+
+.markdown-body {
+    box-sizing: border-box;
+    min-width: 200px;
+    max-width: 980px;
+    margin: 0 auto;
+    padding: 45px;
+}
+
+/* Breadcrumb Navigation Styles */
+.breadcrumb-nav {
+    background: rgba(255, 255, 255, 0.9);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(0, 0, 0, 0.05);
+    border-radius: 10px;
+    padding: 12px 20px;
+    margin-bottom: 25px;
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 8px;
+    font-size: 14px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+}
+
+.breadcrumb-nav .breadcrumb-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.breadcrumb-nav .breadcrumb-link {
+    color: #0066cc;
+    text-decoration: none;
+    font-weight: 500;
+    padding: 6px 12px;
+    border-radius: 6px;
+    transition: all 0.2s ease;
+    white-space: nowrap;
+}
+
+.breadcrumb-nav .breadcrumb-link:hover {
+    background: #f0f8ff;
+    color: #0052a3;
+    transform: translateY(-1px);
+}
+
+.breadcrumb-nav .breadcrumb-separator {
+    color: #6c757d;
+    font-weight: normal;
+    user-select: none;
+}
+
+.breadcrumb-nav .breadcrumb-current {
+    color: #495057;
+    font-weight: 600;
+    padding: 6px 12px;
+    background: #f8f9fa;
+    border-radius: 6px;
+    white-space: nowrap;
+}
+
+@media (max-width: 768px) {
+    .breadcrumb-nav {
+        padding: 10px 15px;
+        font-size: 13px;
+    }
+    
+    .breadcrumb-nav .breadcrumb-link,
+    .breadcrumb-nav .breadcrumb-current {
+        padding: 4px 8px;
+        font-size: 13px;
+    }
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    body {
+        padding: 10px;
+    }
+    .markdown-body {
+        padding: 20px;
+        max-width: 100%;
+    }
+}
+
+/* Syntax Highlighting Base Styles */
+.markdown-body .highlight {
+    background: #282c34 !important;
+    border-radius: 8px !important;
+    margin: 0 !important;
+    padding: 0 !important;
+}
+
+.markdown-body .highlight pre {
+    background: #282c34 !important;
+    color: #abb2bf !important;
+    margin: 0 !important;
+    padding: 20px !important;
+    border-radius: 0 !important;
+}
+
+pre {
+    background-color: #282c34;
+    color: #abb2bf;
+    border-radius: 5px;
+    overflow-x: auto;
+    position: relative;
+    margin: 16px 0;
+}
+
+/* Code Block Enhancement Styles */
+.code-block-wrapper {
+    border: 1px solid #3e4451;
+    border-radius: 8px;
+    background-color: #282c34;
+    margin: 20px 0;
+    overflow: hidden;
+}
+
+.code-block-header {
+    background-color: #21252b;
+    border-bottom: 1px solid #3e4451;
+    padding: 10px 16px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.code-block-controls {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+}
+
+.collapse-btn {
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 6px 10px;
+    border-radius: 6px;
+    font-size: 12px;
+    color: #abb2bf;
+    transition: all 0.2s ease;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    font-weight: 500;
+}
+
+.collapse-btn:hover {
+    background-color: #3e4451;
+    color: #ffffff;
+}
+
+.copy-btn {
+    background: #3e4451;
+    border: 1px solid #5c6370;
+    border-radius: 6px;
+    padding: 6px 10px;
+    cursor: pointer;
+    font-size: 12px;
+    color: #abb2bf;
+    transition: all 0.2s ease;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    font-weight: 500;
+}
+
+.copy-btn:hover {
+    background: #4b5263;
+    border-color: #61afef;
+    color: #ffffff;
+    transform: translateY(-1px);
+    box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+}
+
+.copy-btn.copied {
+    background: #2d5936;
+    border-color: #16a34a;
+    color: #16a34a;
+}
+
+.code-block-content {
+    overflow: hidden;
+    transition: max-height 0.3s ease;
+}
+
+.code-block-content.collapsed {
+    max-height: 0;
+}
+
+.code-block-content pre {
+    margin: 0;
+    border: none;
+    background-color: #282c34 !important;
+    color: #abb2bf !important;
+    padding: 20px;
+    font-family: 'SF Mono', Monaco, 'Cascadia Code', 'Roboto Mono', Consolas, 'Courier New', monospace;
+    font-size: 14px;
+    line-height: 1.5;
+}
+
+.code-block-content .highlight {
+    background: none !important;
+    border-radius: 0;
+}
+
+.code-block-content .highlight pre {
+    background-color: #282c34 !important;
+}
+
+.code-language {
+    font-size: 12px;
+    color: #abb2bf;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+/* Lightbox Styles */
+.lightbox {
+    display: none;
+    position: fixed;
+    z-index: 999;
+    padding: 10px;
+    background-color: rgba(0, 0, 0, 0.8);
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    justify-content: center;
+    align-items: center;
+}
+
+.lightbox img {
+    max-width: 90%;
+    max-height: 90%;
+    margin: auto;
+}
+
+.lightbox:target {
+    display: flex;
+}
+
+.lightbox-close {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    color: white;
+    font-size: 30px;
+    text-decoration: none;
+}
+</style></head>
+<body>
+<div class="page-container">
+<!-- Breadcrumb Navigation -->
+
+
+<div class="content-wrapper">
+<article class="markdown-body">
+<h1>Software in the Era of AI</h1>
+<p>Youtube: <a href="https://www.youtube.com/watch?v=LCEmiRjPEtQ">https://www.youtube.com/watch?v=LCEmiRjPEtQ</a></p>
+<p><img alt="Video Thumbnail" src="https://i.ytimg.com/vi/LCEmiRjPEtQ/hq720.jpg?sqp=-oaymwEnCNAFEJQDSFryq4qpAxkIARUAAIhCGAHYAQHiAQoIGBACGAY4AUAB&amp;rs=AOn4CLCdR9R2QKWNR_TPysdq4kS6cgqhKA"/></p>
+<p>Andrej Karpathy argues that software is undergoing its most fundamental shift in decades. We are moving from manually written code to a new paradigm where software is created through different means.</p>
+<h2>Talk Outline</h2>
+<ul>
+<li><strong>Part 1: The Three Paradigms of Software (1.0, 2.0, and 3.0)</strong></li>
+<li><strong>Part 2: What are LLMs? Exploring the Right Analogies (Utilities, Fabs, and Operating Systems)</strong></li>
+<li><strong>Part 3: The Psychology of LLMs: Working with ‘People Spirits’</strong></li>
+<li><strong>Part 4: Building Partial Autonomy Apps</strong></li>
+<li><strong>Part 5: The Next Frontier: Building for Agents</strong></li>
+<li><strong>Part 6: The Vibe Coding Revolution &amp; Conclusion</strong></li>
+</ul>
+<h2>Part 1: The Three Paradigms of Software</h2>
+<p>Andrej Karpathy begins with a powerful thesis: <strong>software is changing fundamentally for the first time in ~70 years.</strong> He argues that we have witnessed two major shifts in a very short period, leading to three distinct programming paradigms.</p>
+<h3>Software 1.0: Classical Programming</h3>
+<p>This is the traditional way of writing software that has been dominant for decades.</p>
+<ul>
+<li><strong>Concept:</strong> A human explicitly writes instructions in a formal programming language (like Python, C++, JavaScript).</li>
+<li><strong>The Program:</strong> The source code itself.</li>
+<li><strong>The Computer:</strong> The hardware that executes these explicit instructions.</li>
+<li><strong>Example:</strong> The vast collection of repositories on <strong>GitHub</strong> represents the world of Software 1.0.</li>
+</ul>
+<h3>Software 2.0: Neural Networks</h3>
+<p>This paradigm emerged with the rise of deep learning.</p>
+<ul>
+<li><strong>Concept:</strong> Instead of a human writing the logic, the logic is learned from data. The human’s job shifts from writing code to curating datasets and running optimization algorithms.</li>
+<li><strong>The Program:</strong> The <strong>weights</strong> of the neural network. These millions (or billions) of numbers encode the program’s behavior.</li>
+<li><strong>The Computer:</strong> A fixed-function neural network architecture (e.g., AlexNet for image recognition).</li>
+<li><strong>Example:</strong> <strong>Hugging Face</strong> is essentially the “GitHub for Software 2.0,” a hub for sharing and using these neural network weights.</li>
+</ul>
+<h3>Software 3.0: Large Language Models (LLMs)</h3>
+<p>This is the new, emergent paradigm that we are currently entering.</p>
+<ul>
+<li><strong>Concept:</strong> LLMs introduce a new kind of computer that is programmable <em>in context</em>.</li>
+<li><strong>The Program:</strong> The <strong>prompt</strong> itself, written in a natural language like English.</li>
+<li><strong>The Computer:</strong> The Large Language Model (LLM).</li>
+<li><strong>The Key Shift:</strong> Unlike a fixed-function neural net (Software 2.0), an LLM is a <strong>general-purpose, programmable computer</strong>. The most remarkable feature is that its programming language is English (or any human language).</li>
+</ul>
+<h3>A Concrete Example: Sentiment Classification</h3>
+<p>To make these paradigms clear, Karpathy uses the task of classifying text sentiment (positive or negative).</p>
+<h4>Software 1.0 Approach</h4>
+<p>Write a Python function that checks for words from a hardcoded list of positive and negative keywords. This is brittle and hard to maintain.</p>
+<div class="highlight"><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">simple_sentiment</span><span class="p">(</span><span class="n">review</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+    <span class="n">positive_words</span> <span class="o">=</span> <span class="p">{</span><span class="s2">"good"</span><span class="p">,</span> <span class="s2">"excellent"</span><span class="p">,</span> <span class="s2">"amazing"</span><span class="p">,</span> <span class="o">...</span><span class="p">}</span>
+    <span class="n">negative_words</span> <span class="o">=</span> <span class="p">{</span><span class="s2">"bad"</span><span class="p">,</span> <span class="s2">"terrible"</span><span class="p">,</span> <span class="s2">"awful"</span><span class="p">,</span> <span class="o">...</span><span class="p">}</span>
+    <span class="c1"># ... logic to count words and return "positive" or "negative" ...</span>
+</code></pre></div>
+<h4>Software 2.0 Approach</h4>
+<p>Gather thousands of examples of positive and negative reviews. Train a binary classifier (like a simple neural network) on this dataset. The resulting model <em>weights</em> are the program. This is more robust but requires a lot of labeled data.</p>
+<h4>Software 3.0 Approach</h4>
+<p>Write a simple prompt in English that gives the LLM instructions and a few examples (few-shot prompting). The LLM is programmed <em>on the fly</em> to become a sentiment classifier.</p>
+<div class="highlight"><pre><span></span><code>You are a sentiment classifier. For every review... respond with either POSITIVE or NEGATIVE.
+
+Example 1
+&lt;REVIEW&gt;I absolutely loved this film...&lt;/REVIEW&gt;
+POSITIVE
+
+Example 2
+&lt;REVIEW&gt;The plot was incoherent...&lt;/REVIEW&gt;
+NEGATIVE
+
+Now classify the next review.
+</code></pre></div>
+<p>This illustrates the radical shift in how we create functionality—from explicit code, to training with data, to simply instructing in plain language.</p>
+<h2>Part 2: What are LLMs? Exploring the Right Analogies</h2>
+<p>To understand how to build with LLMs, it’s crucial to have the correct mental model. Karpathy evaluates three common analogies: utilities, fabs, and operating systems.</p>
+<h3>Analogy 1: LLMs as a Utility (like Electricity)</h3>
+<p>This analogy, famously proposed by Andrew Ng, compares AI to the new electricity. It captures some aspects well but is ultimately incomplete.</p>
+<h4>Where the Analogy Works</h4>
+<ul>
+<li><strong>Massive Upfront Cost (CapEx):</strong> LLM labs (OpenAI, Google, Anthropic) spend billions on massive GPU clusters, which is similar to building an electrical grid or power plants.</li>
+<li><strong>Ongoing Operational Cost (OpEx):</strong> There are continuous costs to serve intelligence through APIs to millions of users.</li>
+<li><strong>Metered Access:</strong> Users pay for what they consume, typically priced per million tokens, similar to a utility bill based on kilowatt-hours.</li>
+<li><strong>Reliability Demands:</strong> Users demand low latency, high uptime, and consistent quality, much like wanting consistent voltage from the grid.</li>
+<li><strong>“Intelligence Brownouts”:</strong> When a major LLM provider like OpenAI goes down, the “planet gets dumber,” highlighting our growing dependence.</li>
+</ul>
+<h4>Where the Analogy Fails</h4>
+<p>Electricity is a simple, undifferentiated commodity. Water from one tap is the same as water from another. LLMs are far from this. They are complex, differentiated, and have unique “personalities.”</p>
+<h3>Analogy 2: LLMs as Fabs (Chip Manufacturing)</h3>
+<p>This analogy compares LLM training centers to semiconductor fabrication plants (fabs).</p>
+<h4>Where the Analogy Works</h4>
+<ul>
+<li><strong>Huge CapEx:</strong> The cost of building a cutting-edge training cluster is on the same scale as building a new fab.</li>
+<li><strong>Deep Tech R&amp;D and Secrecy:</strong> The process involves highly specialized knowledge, trade secrets, and intense research and development.</li>
+<li><strong>Process Nodes:</strong> The concept of a “4nm process node” in chipmaking has a loose parallel in the scale and sophistication of an LLM training cluster (e.g., a 10^20 FLOPS cluster).</li>
+</ul>
+<h4>Fabless vs. Integrated Models</h4>
+<ul>
+<li>Companies training on NVIDIA GPUs are like <strong>fabless</strong> chip designers (they design the software/model but don’t own the underlying hardware manufacturing).</li>
+<li>Google, by training on its own custom TPUs, is more like an <strong>integrated</strong> manufacturer like Intel, which owns its own fabs.</li>
+</ul>
+<h4>Where the Analogy Fails</h4>
+<p>The output of a fab is physical hardware. The output of an LLM lab is <strong>software</strong>. Software is infinitely and trivially copyable, distributable, and modifiable, which makes it far less defensible than physical silicon.</p>
+<h3>Analogy 3: LLMs as Operating Systems (The Strongest Analogy)</h3>
+<p>Karpathy argues that the most accurate and useful analogy for an LLM is a <strong>new kind of Operating System</strong>, specifically one from the <strong>mainframe and time-sharing era of the 1960s</strong>.</p>
+<h4>Where the Analogy Works</h4>
+<ul>
+<li><strong>Centralized, Expensive Compute:</strong> LLM compute is currently too expensive for personal devices, so it runs in the “cloud” (like a mainframe).</li>
+<li><strong>Time-Sharing and Batching:</strong> We are all “thin clients” accessing the central LLM over the network. Our requests are batched together to maximize the utilization of the expensive hardware.</li>
+<li><strong>The OS Kernel:</strong> The LLM acts as the core kernel or CPU of this new computer.</li>
+<li><strong>RAM:</strong> The <strong>context window</strong> is the equivalent of RAM—it’s the working memory for the OS.</li>
+</ul>
+<h4>I/O and Peripherals</h4>
+<p>The LLM can connect to peripheral devices:</p>
+<ul>
+<li><strong>Disk:</strong> A file system (like a vector database with embeddings).</li>
+<li><strong>CPU:</strong> It can call out to traditional software tools (a “classical computer”) like a calculator or Python interpreter.</li>
+<li><strong>Ethernet:</strong> It can access the internet via a browser.</li>
+<li><strong>Video/Audio:</strong> It can process multimodal inputs.</li>
+</ul>
+<h4>Ecosystem Bifurcation</h4>
+<p>The landscape is splitting, just as it did with operating systems:</p>
+<ul>
+<li><strong>Closed-Source (Windows/macOS):</strong> OpenAI (GPT), Anthropic (Claude), Google (Gemini).</li>
+<li><strong>Open-Source (Linux):</strong> The Llama model ecosystem.</li>
+</ul>
+<p>This “LLM OS” is a powerful framework because it positions the LLM not as a mere tool, but as the central orchestrator of a new computing platform.</p>
+<h2>Part 3: The Psychology of LLMs: Working with ‘People Spirits’</h2>
+<p>Karpathy proposes a memorable and intuitive way to think about LLMs: they are <strong>“people spirits”</strong> or, more technically, <strong>stochastic simulations of people</strong>. Because they are trained on the vast corpus of human text on the internet, they don’t just learn facts; they learn to simulate the patterns, biases, and cognitive quirks of the humans who wrote that text.</p>
+<p>This leads to an <strong>emergent “psychology”</strong>. The LLM is a kind of lossy, averaged-out simulation of a human—specifically, a <strong>savant with significant cognitive issues</strong>. To program them effectively (i.e., to prompt them), we must understand these psychological traits.</p>
+<h3>Key Psychological Traits of an LLM</h3>
+<h4>1. Encyclopedic Knowledge &amp; Perfect Memory (The Savant)</h4>
+<ul>
+<li>LLMs have read more text than any human ever could and can recall it with high fidelity. This gives them superhuman knowledge in many domains.</li>
+<li><strong>Analogy:</strong> This is the “Rain Man” aspect. The LLM can “read” an entire phone book (or all of Wikipedia) and remember the contents.</li>
+</ul>
+<h4>2. Jagged Intelligence (Uneven Capabilities)</h4>
+<ul>
+<li>An LLM’s intelligence is not smooth. It can perform incredibly complex tasks (like writing sophisticated code) and then fail at something a child could do.</li>
+<li><strong>Famous Examples:</strong> An LLM might confidently state that <code>9.11 &gt; 9.9</code> is false, or that the word “strawberry” has two ‘r’s.</li>
+<li><strong>Implication:</strong> You can’t assume a consistent level of competence. The model has “rough edges” you can trip on unexpectedly.</li>
+</ul>
+<h4>3. Anterograde Amnesia (No Long-Term Learning)</h4>
+<ul>
+<li>This is one of the most critical limitations. LLMs <strong>do not learn from your interactions</strong>. Their weights are fixed.</li>
+<li><strong>The Context Window is Working Memory:</strong> Any information you provide exists only for the current conversation. Once the context window slides or the session ends, the LLM “forgets” everything. It has no mechanism to consolidate new experiences into its long-term memory (the weights).</li>
+<li><strong>Analogy:</strong> This is like the characters in the movies <em>Memento</em> or <em>50 First Dates</em>. The protagonist’s weights are “frozen,” and their context window gets wiped clean every morning. This makes building lasting relationships or expertise impossible without external memory systems (like tattoos or video tapes).</li>
+</ul>
+<h4>4. Gullibility (Susceptibility to Manipulation)</h4>
+<ul>
+<li>Because an LLM is a simulator of text patterns, it has no true “self” or “belief system.” It is highly suggestible.</li>
+<li><strong>Prompt Injection:</strong> This is a major security risk. A malicious user can craft a prompt that tricks the LLM into ignoring its original instructions and leaking private data or performing unintended actions.</li>
+<li><strong>Implication:</strong> You can’t simply “trust” the LLM to follow your system prompt if it encounters conflicting instructions in the user prompt. It’s like a very smart but incredibly naive person who will believe almost anything you tell them.</li>
+</ul>
+<h3>Summary of LLM Psychology</h3>
+<p>Karpathy synthesizes these traits into a single, powerful mental model:</p>
+<blockquote>
+<p>An LLM is a <strong>lossy simulation of a savant with cognitive issues</strong>.</p>
+</blockquote>
+<p>When you are prompting an LLM, you are not talking to a database or a traditional computer program. You are interacting with a simulated entity that is simultaneously superhuman and deeply flawed. Understanding this psychology is the key to effective prompting and building reliable applications on top of this technology.</p>
+<h2>Part 4: Building Partial Autonomy Apps</h2>
+<p>The core idea is not to build fully autonomous agents that run wild, but rather to create tools that function as <strong>“Iron Man suits”</strong>—powerful augmentations that keep the human in control. This contrasts with “Iron Man robots,” which are fully autonomous agents. Given the current fallibility of LLMs, the “suit” model is far more practical and valuable today.</p>
+<p>The design goal for any partial autonomy app is to optimize the <strong>human-AI collaboration loop</strong>. This loop consists of two main phases:</p>
+<ol>
+<li><strong>Generation:</strong> The AI performs a task, such as drafting text, writing code, or creating a plan.</li>
+<li><strong>Verification:</strong> The human reviews, edits, and validates the AI’s output.</li>
+</ol>
+<p>The success of an LLM-powered product depends on making this cycle <strong>as fast, easy, and efficient as possible.</strong></p>
+<h3>The Anatomy of a Successful LLM App</h3>
+<p>Karpathy breaks down the key components that successful partial autonomy apps, like <strong>Cursor</strong> (for coding) and <strong>Perplexity</strong> (for research), share. These components are essential for managing the LLM’s capabilities and limitations.</p>
+<h4>1. Package State into a Context Window</h4>
+<ul>
+<li>The app’s most crucial job is to act as a <strong>context builder</strong>. It must automatically gather all the relevant information a human would need for a task and package it perfectly for the LLM.</li>
+<li><strong>Example (Cursor):</strong> Instead of the user manually copy-pasting relevant code files, error messages, and documentation, Cursor automatically pulls this context into the prompt before calling the LLM.</li>
+</ul>
+<h4>2. Orchestrate and Call Multiple Models</h4>
+<ul>
+<li>A single LLM call is often not enough. Sophisticated apps orchestrate a sequence of calls to different, specialized models.</li>
+</ul>
+<p><strong>Example (Cursor/Perplexity):</strong></p>
+<ul>
+<li><strong>Embedding Models:</strong> To find relevant files or search results (semantic search).</li>
+<li><strong>Chat/Reasoning Models:</strong> To generate the main response, code, or plan.</li>
+<li><strong>Diff/Apply Models:</strong> Specialized models that take a proposed change and apply it cleanly to a file.</li>
+</ul>
+<p>This orchestration is hidden from the user, creating a seamless experience.</p>
+<h4>3. Application-Specific GUI and UI/UX</h4>
+<ul>
+<li>This is a critical, often-underestimated component. The UI should not just be a chat box. It must be designed to make the <strong>verification</strong> step effortless for the human.</li>
+<li><strong>Why it Matters:</strong> Humans have a powerful “computer vision GPU” in their brains. Visual information is processed much faster and more intuitively than text.</li>
+<li><strong>Example:</strong> It is far easier for a developer to approve a visual <strong>code diff</strong> (with green for additions and red for deletions) than to read a paragraph describing the changes. Similarly, Perplexity provides direct links to sources, allowing for quick visual verification. A custom GUI speeds up the human’s part of the loop dramatically.</li>
+</ul>
+<h4>4. The Autonomy Slider</h4>
+<p>This is a core concept for partial autonomy. The user should be able to control the level of autonomy they delegate to the AI based on the task’s complexity and their trust in the model.</p>
+<p><strong>Example (Cursor):</strong></p>
+<ul>
+<li><strong>Low Autonomy:</strong> Tab for single-line autocomplete. (Small, concrete change).</li>
+<li><strong>Medium Autonomy:</strong> <code>Cmd+K</code> to edit a selected block of code. (Larger, but contained change).</li>
+<li><strong>High Autonomy:</strong> <code>Cmd+L</code> to edit an entire file.</li>
+<li><strong>Full Autonomy:</strong> <code>Cmd+I</code> for “agent mode,” where the AI can modify the entire codebase.</li>
+</ul>
+<p><strong>Example (Perplexity):</strong></p>
+<p>The user can choose between a quick <code>search</code>, a more detailed <code>research</code>, or a <code>deep research</code> which takes longer but is more comprehensive.</p>
+<p>By combining these four elements, startups can build powerful “Iron Man suits” that augment human capabilities, manage the LLM’s flaws, and create a fast, effective generation-verification workflow.</p>
+<h2>Part 5: The Next Frontier: Building for Agents</h2>
+<p>So far, the internet and all software have been designed with one consumer in mind: the human. We use visual GUIs with buttons, images, and complex layouts. Computers interact through structured APIs. Karpathy argues that we are now seeing the emergence of a <strong>third category of consumer: Agents</strong>.</p>
+<p>Agents are a hybrid: they are computers, but they are <em>human-like</em>. They understand natural language and need information presented in a way that is legible to them, not just to a traditional computer or a human eye.</p>
+<h3>The Problem: The Web is Built for People, Not LLMs</h3>
+<p>Currently, when an agent (like Devin or an LLM-powered browser) tries to use a website, it faces major challenges:</p>
+<ul>
+<li><strong>Parsing HTML is Hard:</strong> It has to scrape a webpage designed for human vision, full of complex HTML, CSS, and JavaScript. This is error-prone and inefficient. The LLM has to “guess” what the important content is.</li>
+<li><strong>“Click” is Not an Action for an Agent:</strong> Documentation often says “click the ‘Create Project’ button.” An agent can’t “click.” It needs a concrete, machine-executable action, like a <code>cURL</code> command.</li>
+</ul>
+<h3>The Opportunity: Make the Digital World Agent-Legible</h3>
+<p>The massive opportunity for startups is to <strong>bridge this gap</strong> and create the infrastructure that makes the world readable and actionable for LLMs. This involves two key ideas:</p>
+<h4>1. Create LLM-Friendly Documentation (The <code>llms.txt</code> Standard)</h4>
+<ul>
+<li>Just as <code>robots.txt</code> tells web crawlers how to behave, Karpathy proposes a new standard: <strong><code>/llms.txt</code></strong>.</li>
+<li>This would be a simple <strong>Markdown</strong> file on a website’s server that describes its functionality in a way that is easy for an LLM to parse. Markdown is perfect because it’s structured but still human-readable.</li>
+<li><strong>Example (Vercel &amp; Stripe):</strong> These companies are early pioneers. You can go to <code>vercel.com/docs/llms.txt</code> and see their entire documentation neatly formatted in Markdown, ready for an LLM to ingest. This is far superior to scraping their visually-oriented docs pages.</li>
+</ul>
+<h4>2. Translate Human Actions into Agent Actions (“Click” → <code>cURL</code>)</h4>
+<ul>
+<li>In addition to making information <em>readable</em>, we need to make it <em>actionable</em>.</li>
+<li><strong>Example (Vercel):</strong> In their documentation, wherever they used to say “click,” they are now adding the equivalent <code>cURL</code> command. This provides a direct, unambiguous instruction that an agent can execute.</li>
+<li><strong>Example (Stripe’s MCP):</strong> The <strong>Stripe Model-Context Protocol (MCP)</strong> is a more formal version of this idea. It’s a protocol that allows an agent (like Cursor) to discover and call Stripe’s API by interacting with a local server, abstracting away the complexity for the user and the agent.</li>
+</ul>
+<h3>Context Builders: A New Class of Tools</h3>
+<p>These ideas fall under a broader category of tools Karpathy calls <strong>“context builders.”</strong> Their job is to take complex, human-oriented information and transform it into a clean, LLM-friendly format.</p>
+<h4>Examples</h4>
+<ul>
+<li><strong>Gitingest:</strong> A simple tool that takes a GitHub repository URL and converts the entire codebase into a single, flat text file with a directory structure at the top. This makes it trivial to copy-paste an entire repo into an LLM’s context window.</li>
+<li><strong>Devin DeepWiki:</strong> Takes this a step further by not just flattening the code but also generating a high-level summary and architectural diagrams, creating an even richer context for the LLM.</li>
+</ul>
+<p>The key takeaway is that we need to stop thinking of our digital world as being just for humans. By creating <strong>agent-first interfaces</strong>, we can unlock a new level of automation and capability. There is a huge opportunity for startups to build the tools, protocols, and services that facilitate this transition.</p>
+<h2>Part 6: The Vibe Coding Revolution &amp; Conclusion</h2>
+<p>Karpathy introduces a concept he humorously calls <strong>“vibe coding,”</strong> which perfectly encapsulates the new, intuitive, and sometimes chaotic way of building software with LLMs.</p>
+<h3>What is Vibe Coding?</h3>
+<p>It’s a new kind of programming where you <strong>“fully give in to the vibes, embrace exponentials, and forget that the code even exists.”</strong></p>
+<h4>The Experience</h4>
+<p>Instead of meticulously writing and debugging code, you simply talk to the LLM (e.g., Cursor Composer). You ask for what you want in plain English, even for “dumb” things like “decrease the padding on the sidebar by half,” because it’s faster than finding the setting yourself. You “Accept All” on diffs and just copy-paste error messages back into the chat.</p>
+<h4>The Result</h4>
+<p>The code grows beyond your direct comprehension. You are no longer a programmer in the traditional sense; you are a <strong>manager, a director, and a QA tester</strong>, guiding a very talented but quirky “people spirit.”</p>
+<p>This became a viral meme after Karpathy tweeted about it, resonating with many developers who were experiencing the same shift. It even got its own Wikipedia page, much to his amusement.</p>
+<p>The core of vibe coding is that it <strong>makes software highly accessible</strong>. It lowers the barrier to entry so much that even kids can start building things. Karpathy shares a wholesome video from Thomas Wolf (Hugging Face) of a “vibe coding event” with 9-13 year olds. These kids, with no formal training, are building apps and websites.</p>
+<blockquote>
+<p><strong>Takeaway:</strong> AI is unleashing a generation of wildly creative builders beyond anything we could have imagined. And they grow up “knowing” they can build anything.</p>
+</blockquote>
+<h3>Karpathy’s Vibe Coded Projects</h3>
+<p>Karpathy shows his own “vibe coded” projects:</p>
+<ul>
+<li>An <strong>iOS calorie tracking app</strong> he built in a day without knowing Swift.</li>
+<li><strong>MenuGen.app</strong>, a tool that takes a picture of a restaurant menu and generates images of the food, solving his personal problem of not knowing what to order.</li>
+</ul>
+<p>The fascinating insight from building MenuGen was that <strong>the code was the easiest part</strong>. The hard part was all the “Software 1.0” grunt work: dealing with API keys, Vercel deployments, domain names, authentication, and payments—all tasks that involved clicking around in web browsers. This highlights the opportunity to <strong>build for agents</strong> so they can handle this tedious work too.</p>
+<h3>Final Summary: Building the Future of Autonomous Software</h3>
+<p>Karpathy concludes by summarizing the key takeaways of his talk into a powerful vision for the future.</p>
+<h4>What we should be building</h4>
+<ul>
+<li>✅ <strong>Iron Man suits,</strong> not Iron Man robots.</li>
+<li>✅ <strong>Partial autonomy products</strong> that keep humans in the loop.</li>
+<li>✅ <strong>Custom GUI and UI/UX</strong> to make the human verification step fast and intuitive.</li>
+<li>✅ A fast <strong>Generation-Verification loop</strong>.</li>
+<li>✅ An <strong>autonomy slider</strong> to give users control.</li>
+</ul>
+<h4>What we should avoid for now</h4>
+<ul>
+<li>❌ <strong>Flashy demos of fully autonomous agents</strong> that are brittle and not yet practical products.</li>
+<li>❌ Getting bogged down by premature discussions of <strong>AGI in 2027</strong>.</li>
+</ul>
+<p>The next decade will be about taking the autonomy slider and gradually moving it <strong>from augmentation on the left to full agency on the right</strong>.</p>
+<p>The talk ends on an optimistic and inspiring note. We are in a unique and unprecedented moment. A new kind of computer has been invented, one that is programmable in our native language. This technology has been instantly distributed to billions of people, flipping the script on how technology usually diffuses (from government/corporations to consumers).</p>
+<p>Now, it is our time—the time for builders, startups, and everyone in the audience—to program them.</p>
+</article>
+</div>
+</div>
+<!-- Lightbox HTML template -->
+<div class="lightbox" id="lightbox">
+<a class="lightbox-close" href="#">×</a>
+<img alt="Full-size image" id="lightbox-img" src=""/>
+</div>
+<script type="module">
+        import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
+        mermaid.initialize({ startOnLoad: true });
+    </script>
+<!-- Common wiki functionality -->
+<script src="/static/js/common.js"></script>
+<div style="
+                margin-top: 4rem; 
+                padding: 1rem; 
+                border-top: 1px solid #e9ecef; 
+                color: #6c757d; 
+                font-size: 0.875rem; 
+                text-align: center;
+            ">📄 Shared from Personal Wiki</div></body>
+</html>
